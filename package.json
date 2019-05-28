@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/wdio wdio.conf.js",
+    "test:debug": " export DEBUG=true || set DEBUG=true && npm run test"
+
   },
   "author": "",
   "license": "ISC",

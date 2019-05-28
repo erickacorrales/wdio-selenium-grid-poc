@@ -1,3 +1,12 @@
+const help = ['./test/specs/test2.spec.js'];
+const landing = ['./test/specs/test.spec.js']; 
+const debug = process.env.DEBUG;
+const defaultTimeoutInterval = 60000;
+
+const baseUrl = process.env.SERVER === 'prod' ? 'https://localhost':'https://webdriver.io';
+const timeout = debug ? 99999999 : defaultTimeoutInterval;
+const execArgvs =  debug ? ['--inspect'] : [];
+
 exports.config = {
     //
     // ====================
@@ -7,6 +16,13 @@ exports.config = {
     // WebdriverIO allows it to run your tests in arbitrary locations (e.g. locally or
     // on a remote machine).
     runner: 'local',
+    execArgv: execArgvs,
+
+     // define specific suites
+    suites: {
+        help: help,
+        landing: landing
+    },
     //
     // =====================
     // Server Configurations
@@ -102,10 +118,10 @@ exports.config = {
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    baseUrl: 'http://localhost',
+    baseUrl: baseUrl,
     //
     // Default timeout for all waitFor* commands.
-    waitforTimeout: 10000,
+    waitforTimeout: 60000,
     //
     // Default timeout in milliseconds for request
     // if Selenium Grid doesn't send response
@@ -141,7 +157,7 @@ exports.config = {
     // See the full list at http://mochajs.org/
     mochaOpts: {
         ui: 'bdd',
-        timeout: 60000,
+        timeout: timeout,
         compilers: ['js:@babel/register']
         // require: ['./test/helpers/common.js']
     },
