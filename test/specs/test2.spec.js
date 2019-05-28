@@ -1,6 +1,4 @@
 import HelpPage from '../page-objects/help.page.js';
-import { expect } from 'chai';
-
 describe('test help pagen', () => {
     it('should contain text', () => {
         HelpPage.open();

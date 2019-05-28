@@ -36,6 +36,8 @@ exports.config = {
     //
     hostname: 'localhost',
     port: 4444,
+
+    //change this line using only '/' below to override default path ('/wd/hub') for usage of driver binary directly, ex: chromedriver or geckodriver.
     path: '/wd/hub',
     //
     // ==================
@@ -192,7 +194,18 @@ exports.config = {
      * @param {Array.<String>} specs List of spec file paths that are to be run
      */
      before: function (capabilities, specs) {
-        console.log('Before --->', browser.getUrl());
+        const chai = require('chai');
+        global.expect = chai.expect;
+        chai.Should();
+
+        browser.addCommand("getUrlAndTitle", function (customVar) {
+            // `this` refers to the `browser` scope
+            return {
+                url: this.getUrl(),
+                title: this.getTitle(),
+                customVar: customVar
+            };
+        });
      },
     /**
      * Runs before a WebdriverIO command gets executed.

@@ -1,11 +1,10 @@
     
 import LandingPage from '../page-objects/landing.page';
-import { expect } from 'chai';
-
 describe('webdriver.io page', () => {
     it('should have the right title', () => {
         LandingPage.open();
         // browser.debug();
-        expect(LandingPage.getTitle()).to.contain('WebdriverIO · Next-gen WebDriver test framework for Node.js');
+        const result = LandingPage.getUrlAndTitle('someVar');
+        expect(result.title).to.contain('WebdriverIO · Next-gen WebDriver test framework for Node.js');
     });
 });

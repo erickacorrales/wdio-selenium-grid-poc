@@ -5,6 +5,10 @@ class LandingPage extends Page {
         super.open("/");
     }
 
+    getUrlAndTitle(customVars) {
+        return  browser.getUrlAndTitle(customVars);
+    }
+
 }
 
 export default new LandingPage();
